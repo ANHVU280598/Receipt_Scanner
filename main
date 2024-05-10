@@ -43,7 +43,7 @@ workbook = Workbook()
 sheet = workbook.active
 
 # Add headers
-headers = ['Trans Date', 'Description', 'Amount']
+headers = ['Trans Date', 'Post Date', 'Description', 'Amount']
 sheet.append(headers)
 
 for key, value in grouped_transactions.items():
@@ -51,9 +51,12 @@ for key, value in grouped_transactions.items():
     total = 0
     for i, transaction in enumerate(value, 1):
         trans_date = transaction['Trans Date']
+        post_date = transaction['Post Date']
         description = transaction['Description']
-        amount = transaction ['Amount']
-        row = [transaction['Trans Date'], transaction['Description'], transaction['Amount']]
+        amount_str = transaction ['Amount']
+
+        amount = float(amount_str.replace(",", "").replace("$", "").replace(" ",""))
+        row = [transaction['Trans Date'], transaction['Post Date'], transaction['Description'], transaction['Amount']]
         total += amount
         sheet.append(row)
 

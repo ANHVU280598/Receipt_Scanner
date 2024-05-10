@@ -1,0 +1,3 @@
+virtualenv venv 
+venv/Scripts/active
+pip install PyPDF2
